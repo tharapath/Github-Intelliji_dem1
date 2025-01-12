@@ -5,15 +5,14 @@ Feature: Launch Google Page
     When I navigate to Google
     Then I should see the Google homepage
 
-Feature: Google Search Functionality
   Scenario Outline: Search for a specific term in Google
     Given I am on the Google homepage
     When I search for "<search_term>"
-    Then I should see search results for "<search_term>"
+    Then I should see search results for "<Result String>"
 
     Examples:
-      | search_term       |
-      | HDFC ERGO plans   |
-      | 10 lakh insurance |
-      | Optima Secure     |
-      | No claim bonus    |
+      | search_term       |Result String|
+      | HDFC ERGO Plans    |HDFC        |
+      | 10 lakh insurance | INSURANCE|
+      | Optima Secure     | optima|
+      | No claim bonus    | claim|

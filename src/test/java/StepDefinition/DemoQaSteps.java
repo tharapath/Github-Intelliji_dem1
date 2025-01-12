@@ -43,20 +43,36 @@ public class DemoQaSteps {
     }
 
     @When("I click on the Right click button")
-    public void iClickOnTheRightClickButton() {
+    public void iClickOnTheRightClickButton() throws InterruptedException {
+        Actions actions = new Actions(driver);
+        WebElement targetElement = driver.findElement(By.xpath("//button[@id='rightClickBtn']"));
+        actions.contextClick(targetElement).perform();
+        Thread.sleep(3000);
     }
+
 
     @Then("I see You have done a Right click text")
     public void iSeeYouHaveDoneARightClickText() {
+        String rightClickBtn =driver.findElement(By.id("rightClickBtn")).getText();
+        Assert.assertEquals(" Right click  text not matching with expected","You have done a right click me",rightClickBtn);
     }
 
     @When("I click on the Click Me button")
-    public void iClickOnTheClickMeButton() {
+    public void iClickOnTheClickMeButton() throws InterruptedException {
+        WebElement targetElement = driver.findElement(By.xpath("//button[text()='Click Me']"));
+        Actions actions = new Actions(driver);
+        actions.click(targetElement).perform();
+        Thread.sleep(3000);
     }
+    
 
     @Then("I see You have done a dynamic click text")
     public void iSeeYouHaveDoneADynamicClickText() {
-    }
+        String rightClickBtn =driver.findElement(By.id("Click Me message']")).getText();
+        Assert.assertEquals(" dynamic click text not matching with expected","You have done a dynamic click",rightClickBtn);
+
+
+}
 
     @After
     public void iCloseBrowser(Scenario scenario) throws IOException {
@@ -73,7 +89,7 @@ public class DemoQaSteps {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
     }
 
 }

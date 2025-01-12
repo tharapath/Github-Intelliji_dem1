@@ -53,8 +53,8 @@ public class DemoQaSteps {
 
     @Then("I see You have done a Right click text")
     public void iSeeYouHaveDoneARightClickText() {
-        String rightClickBtn =driver.findElement(By.id("rightClickBtn")).getText();
-        Assert.assertEquals(" Right click  text not matching with expected","You have done a right click me",rightClickBtn);
+        String rightClickBtn =driver.findElement(By.id("rightClickMessage")).getText();
+        Assert.assertEquals(" Right click  text not matching with expected","You have done a right click",rightClickBtn);
     }
 
     @When("I click on the Click Me button")
@@ -68,10 +68,11 @@ public class DemoQaSteps {
 
     @Then("I see You have done a dynamic click text")
     public void iSeeYouHaveDoneADynamicClickText() {
-        String rightClickBtn =driver.findElement(By.id("Click Me message']")).getText();
-        Assert.assertEquals(" dynamic click text not matching with expected","You have done a dynamic click",rightClickBtn);
-
-
+        WebElement messageElement = driver.findElement(By.id("dynamicClickMessage"));
+        String actualMessage = messageElement.getText();
+        Assert.assertEquals("Dynamic click text not matching with expected",
+                "You have done a dynamic click",
+                actualMessage);
 }
 
     @After
